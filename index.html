@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLOD | اكتشف باقتك المثالية مع مستشار التغذية ثلاثي الأبعاد</title>
+    <title>FLOD | مستشار التغذية التفاعلي</title>
     <!-- Google Fonts: Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             /* هوية فلود: أحمر وأبيض */
-            --flod-red: #E31C25; /* أحمر حيوي واحترافي */
+            --flod-red: #E31C25;
             --flod-red-hover: #b9151c;
             --flod-white: #ffffff;
             --flod-bg: #fdfdfd;
@@ -17,10 +17,10 @@
             --flod-text: #1a1a1a;
             --flod-text-light: #5f5f5f;
             --border-radius-lg: 24px;
-            --border-radius-sm: 12px;
+            --border-radius-sm: 16px;
             --shadow-subtle: 0 10px 30px rgba(0,0,0,0.03);
             --shadow-hover: 0 15px 45px rgba(227, 28, 37, 0.1);
-            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         * {
@@ -43,65 +43,52 @@
             overflow-x: hidden;
         }
 
-        /* لودنج ناعم */
-        body.loading {
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
         /* الهيدر المحترف */
         header {
             width: 100%;
-            max-width: 800px;
+            max-width: 700px;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             animation: fadeInDown 0.8s ease;
         }
 
-        header h1 {
-            font-size: 3rem;
+        .brand-logo {
+            font-size: 3.8rem;
             font-weight: 900;
             color: var(--flod-red);
-            letter-spacing: -1px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        header h1 span {
-            color: var(--flod-text);
+            letter-spacing: 2px;
+            line-height: 1;
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
         header p {
             font-size: 1.1rem;
             color: var(--flod-text-light);
-            margin-top: 10px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         /* حاوية الكويز الرئيسية */
         .quiz-wrapper {
             background: var(--flod-white);
             width: 100%;
-            max-width: 800px;
+            max-width: 700px;
             border-radius: var(--border-radius-lg);
             box-shadow: var(--shadow-subtle);
-            padding: 50px;
+            padding: 45px;
             position: relative;
-            animation: fadeInUp 1s ease;
-            border: 1px solid rgba(0,0,0,0.03);
+            animation: fadeInUp 0.8s ease;
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
         /* شريط التقدم */
         .progress-container {
             width: 100%;
             background-color: var(--flod-gray-bg);
-            height: 10px;
+            height: 8px;
             border-radius: 10px;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             overflow: hidden;
-            position: relative;
         }
 
         .progress-bar {
@@ -109,7 +96,7 @@
             width: 0%;
             background: var(--flod-red);
             border-radius: 10px;
-            transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: width 0.5s ease;
         }
 
         /* خطوات الكويز */
@@ -119,34 +106,33 @@
 
         .quiz-step.active {
             display: block;
-            animation: fadeIn 0.6s ease;
+            animation: fadeIn 0.5s ease;
         }
 
         .step-header {
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             text-align: center;
         }
 
         .step-header h2 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 800;
             color: var(--flod-text);
-            line-height: 1.2;
         }
 
         .step-header p {
             color: var(--flod-text-light);
-            font-size: 1rem;
-            margin-top: 8px;
+            font-size: 0.95rem;
+            margin-top: 6px;
             font-weight: 600;
         }
 
-        /* شبكة الخيارات بصور 3D */
+        /* شبكة الخيارات (نصوص فقط) */
         .options-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            gap: 20px;
+            margin-bottom: 35px;
         }
 
         /* كرت الخيار الاحترافي */
@@ -154,7 +140,7 @@
             background: var(--flod-white);
             border: 2px solid var(--flod-gray-bg);
             border-radius: var(--border-radius-sm);
-            padding: 25px;
+            padding: 30px 20px;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
@@ -162,56 +148,37 @@
             align-items: center;
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
 
         .option-card:hover {
             border-color: var(--flod-red);
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-hover);
         }
 
         .option-card.selected {
             border-color: var(--flod-red);
-            background-color: rgba(227, 28, 37, 0.03);
+            background-color: rgba(227, 28, 37, 0.02);
             box-shadow: var(--shadow-hover);
         }
 
-        /* حاوية صور الأكل 3D الجاهزة */
-        .option-card .image-3d-container {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .option-card .image-3d-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            /* أنيميشن بسيط عند الهوفر ليعطي إحساس بالحياة */
-            transition: transform 0.5s ease;
-        }
-
-        .option-card:hover .image-3d-container img {
-            transform: scale(1.1) rotate(5deg);
+        .option-card .badge-icon {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
         }
 
         .option-card h4 {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--flod-text);
-            font-weight: 700;
-            margin-top: 10px;
+            font-weight: 800;
         }
 
         .option-card p {
             font-size: 0.9rem;
             color: var(--flod-text-light);
-            margin-top: 5px;
+            margin-top: 6px;
             font-weight: 600;
+            line-height: 1.4;
         }
 
         /* أيقونة الاختيار */
@@ -219,8 +186,8 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             border: 2px solid var(--flod-gray-bg);
             border-radius: 50%;
             background: #fff;
@@ -230,19 +197,6 @@
         .option-card.selected .select-icon {
             background: var(--flod-red);
             border-color: var(--flod-red);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .option-card.selected .select-icon::after {
-            content: '';
-            width: 10px;
-            height: 6px;
-            border-left: 2px solid #fff;
-            border-bottom: 2px solid #fff;
-            transform: rotate(-45deg);
-            margin-top: -2px;
         }
 
         /* أزرار التنقل */
@@ -250,11 +204,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 20px;
+            gap: 15px;
         }
 
         .btn {
-            padding: 15px 35px;
+            padding: 16px 30px;
             border-radius: var(--border-radius-sm);
             font-weight: 800;
             font-size: 1rem;
@@ -267,12 +221,11 @@
             background-color: var(--flod-red);
             color: white;
             flex-grow: 1;
-            margin-right: 15px;
         }
 
         .btn-next:hover {
             background-color: var(--flod-red-hover);
-            box-shadow: 0 8px 25px rgba(227, 28, 37, 0.2);
+            box-shadow: 0 8px 25px rgba(227, 28, 37, 0.25);
         }
 
         .btn-back {
@@ -281,27 +234,27 @@
         }
 
         .btn-back:hover {
-            background-color: #e9ecef;
+            background-color: #e8e8e8;
             color: var(--flod-text);
         }
 
-        /* شاشة النتيجة الخرافية */
+        /* شاشة النتيجة */
         .result-box {
             text-align: center;
             display: none;
-            animation: fadeInPop 0.8s ease;
+            animation: fadeIn 0.6s ease;
         }
 
         .result-header h3 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--flod-red);
             font-weight: 900;
         }
 
         .result-header p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--flod-text-light);
-            margin-top: 8px;
+            margin-top: 6px;
             font-weight: 600;
         }
 
@@ -309,87 +262,76 @@
             display: inline-block;
             background-color: var(--flod-gray-bg);
             color: var(--flod-text);
-            padding: 10px 25px;
+            padding: 12px 28px;
             border-radius: 50px;
             font-weight: 800;
             font-size: 1.2rem;
             margin: 25px 0;
-            border: 2px solid rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* ملخص الماكروز بستايل مودرن */
+        /* ملخص الماكروز */
         .macros-summary {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            gap: 15px;
             background: var(--flod-gray-bg);
-            padding: 30px;
+            padding: 25px;
             border-radius: var(--border-radius-sm);
-            margin: 30px 0;
-        }
-
-        .macro-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin: 25px 0;
         }
 
         .macro-item h5 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--flod-text);
             font-weight: 900;
         }
 
         .macro-item span {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--flod-text-light);
             font-weight: 700;
-            margin-top: 5px;
+            margin-top: 4px;
+            display: block;
         }
 
-        /* زر الدعوة لاتخاذ إجراء (CTA) */
         .btn-cta {
             width: 100%;
             background-color: var(--flod-red);
             color: white;
-            padding: 20px;
-            font-size: 1.2rem;
-            font-weight: 900;
+            padding: 18px;
+            font-size: 1.15rem;
+            font-weight: 800;
             text-decoration: none;
             display: inline-block;
             border-radius: var(--border-radius-sm);
-            margin-top: 20px;
+            margin-top: 15px;
             transition: var(--transition);
         }
 
         .btn-cta:hover {
             background-color: var(--flod-red-hover);
-            transform: scale(1.02);
-            box-shadow: 0 10px 30px rgba(227, 28, 37, 0.2);
+            box-shadow: 0 10px 30px rgba(227, 28, 37, 0.25);
         }
 
         /* أنيميشن */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInPop { 0% { opacity: 0; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* موبايل متجاوب */
         @media (max-width: 600px) {
-            header h1 { font-size: 2.2rem; }
+            .brand-logo { font-size: 3rem; }
             .quiz-wrapper { padding: 30px 20px; }
-            .step-header h2 { font-size: 1.5rem; }
+            .step-header h2 { font-size: 1.4rem; }
             .options-grid { grid-template-columns: 1fr; }
-            .macros-summary { grid-template-columns: 1fr; gap: 15px; padding: 20px; }
-            .macro-item h5 { font-size: 1.5rem; }
-            .btn { padding: 12px 20px; font-size: 0.9rem; }
+            .macros-summary { grid-template-columns: 1fr; gap: 12px; }
         }
     </style>
 </head>
-<body class="loading">
+<body>
 
 <header>
-    <h1>F<span>LOD</span></h1>
+    <div class="brand-logo">FLOD</div>
     <p>مستشار التغذية التفاعلي | On your diet and your off days</p>
 </header>
 
@@ -398,58 +340,46 @@
         <div class="progress-bar" id="progressBar"></div>
     </div>
 
-    <!-- Step 1: Goal -->
+    <!-- Step 1 -->
     <div class="quiz-step active" id="step1">
         <div class="step-header">
             <h2>وش هدفك الصحي الفترة الجاية؟ 🎯</h2>
-            <p>اختر الهدف لمساعدتنا في تحديد الباقة الأنسب</p>
+            <p>اختر الهدف لمساعدتنا في تحديد السعرات والباقة المناسبة</p>
         </div>
         <div class="options-grid">
             <div class="option-card" onclick="selectOption(this, 'step1', 'weight_loss')">
                 <div class="select-icon"></div>
-                <div class="image-3d-container">
-                    <!-- صورة ريندر 3D لفواكه وخضروات طازجة (خسارة وزن) -->
-                    <img src="https://img.freepik.com/premium-photo/3d-render-fresh-fruits-vegetables-with-weight-scale-tape-measure-fitness-weight-loss_839035-72886.jpg" alt="خسارة وزن">
-                </div>
+                <div class="badge-icon">🏋️‍♂️</div>
                 <h4>تنشيف وإنقاص وزن</h4>
-                <p>وجبات عالية البروتين وقليلة السعرات</p>
+                <p>وجبات عالية البروتين وقليلة السعرات الحرارية</p>
             </div>
             <div class="option-card" onclick="selectOption(this, 'step1', 'muscle_build')">
                 <div class="select-icon"></div>
-                <div class="image-3d-container">
-                    <!-- صورة ريندر 3D لأكل غني بالبروتين (بناء عضل) -->
-                    <img src="https://img.freepik.com/premium-photo/3d-render-fresh-salmon-fillet-steak-with-asparagus-healthy-meal-illustration_839035-37367.jpg" alt="بناء عضل">
-                </div>
+                <div class="badge-icon">🦾</div>
                 <h4>بناء عضل وزيادة كتلة</h4>
-                <p>تغذية مكثفة ودعم تمارينك القوية</p>
+                <p>تغذية مكثفة لدعم التمارين والنشاط العالي</p>
             </div>
         </div>
     </div>
 
-    <!-- Step 2: Meals -->
+    <!-- Step 2 -->
     <div class="quiz-step" id="step2">
         <div class="step-header">
             <h2>كم وجبة تشملها باقتك اليومية؟ 🍽️</h2>
-            <p>اختر عدد الوجبات التي تناسب نمط يومك</p>
+            <p>حدد نظام الوجبات الذي يتناسب مع جدولك</p>
         </div>
         <div class="options-grid">
             <div class="option-card" onclick="selectOption(this, 'step2', '2_meals')">
                 <div class="select-icon"></div>
-                <div class="image-3d-container">
-                    <!-- صورة ريندر 3D لوجبتين صحيتين مرتبتين (2meals) -->
-                    <img src="https://img.freepik.com/premium-photo/3d-rendering-healthy-diet-food-delivery-cardboard-boxes-white_113010-845.jpg" alt="وجبتين">
-                </div>
+                <div class="badge-icon">🥗</div>
                 <h4>وجبتين + سناك</h4>
-                <p>مثالي للدوامات والنشاط المتوسط</p>
+                <p>خيار مثالي ونظام متوازن للدوام والعمل</p>
             </div>
             <div class="option-card" onclick="selectOption(this, 'step2', '3_meals')">
                 <div class="select-icon"></div>
-                <div class="image-3d-container">
-                    <!-- صورة ريندر 3D لمجموعة كاملة من الوجبات (3 meals) -->
-                    <img src="https://img.freepik.com/premium-photo/3d-render-healthy-food-boxes-balanced-diet-delivery-service-concept_113010-388.jpg" alt="3 وجبات">
-                </div>
+                <div class="badge-icon">🍱</div>
                 <h4>3 وجبات كاملة + سناك</h4>
-                <p>تغطية شاملة ليومك من الفطور للعشاء</p>
+                <p>تغطية كاملة لاحتياجك الغذائي طوال اليوم</p>
             </div>
         </div>
     </div>
@@ -458,15 +388,15 @@
     <div class="result-box" id="resultBox">
         <div class="result-header">
             <h3>أبشر!</h3>
-            <p>جهزنا لك الباقة المثالية من FLOD ✨</p>
+            <p>جهات لك الباقة المثالية من FLOD ✨</p>
         </div>
 
-        <div class="badge-plan" id="recommendedPlan">تحميل الباقة...</div>
+        <div class="badge-plan" id="recommendedPlan">باقة FLOD Lean & Fit</div>
 
         <div class="macros-summary">
             <div class="macro-item">
                 <h5 id="calResult">0</h5>
-                <span>سعرة تقديرية</span>
+                <span>سعرة / يوم</span>
             </div>
             <div class="macro-item">
                 <h5 id="proteinResult">0g</h5>
@@ -478,15 +408,13 @@
             </div>
         </div>
 
-        <p style="color:var(--flod-text-light); font-weight:600; margin-bottom:20px;">حمل تطبيق FLOD الآن واشترك في باقتك مباشرة!</p>
-
-        <a href="https://www.flod-sa.com/" target="_blank" class="btn-cta">اشترك الآن عبر FLOD</a>
+        <a href="https://www.flod-sa.com/" target="_blank" class="btn-cta">اشترك الآن في الباقة عبر FLOD</a>
     </div>
 
     <!-- Actions -->
     <div class="quiz-actions" id="quizActions">
         <button class="btn btn-back" id="backBtn" onclick="prevStep()" style="display:none;">السابق</button>
-        <button class="btn btn-next" id="nextBtn" onclick="nextStep()" disabled>التالي</button>
+        <button class="btn btn-next" id="nextBtn" onclick="nextStep()" disabled style="opacity:0.5;">التالي</button>
     </div>
 </div>
 
@@ -495,22 +423,13 @@
     const totalSteps = 2;
     let userChoices = {};
 
-    // لودنج ناعم
-    window.addEventListener('load', () => {
-        document.body.classList.remove('loading');
-        updateProgress();
-    });
-
     function selectOption(element, step, value) {
-        // حذف التحديد القديم
         const parent = element.parentElement;
         parent.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
         
-        // تحديد الخيار الجديد
         element.classList.add('selected');
         userChoices[step] = value;
         
-        // تفعيل زر التالي
         document.getElementById('nextBtn').disabled = false;
         document.getElementById('nextBtn').style.opacity = '1';
     }
@@ -521,31 +440,21 @@
     }
 
     function nextStep() {
-        // التحقق من الاختيار
-        if (!userChoices['step' + currentStep]) {
-            alert('فضلاً اختر خياراً للمتابعة');
-            return;
-        }
+        if (!userChoices['step' + currentStep]) return;
 
         if (currentStep < totalSteps) {
-            // إخفاء الخطوة الحالية
             document.getElementById('step' + currentStep).classList.remove('active');
             currentStep++;
-            // إظهار الخطوة التالية
             document.getElementById('step' + currentStep).classList.add('active');
             
-            // تحديث الأزرار
             document.getElementById('backBtn').style.display = 'block';
             if (currentStep === totalSteps) {
                 document.getElementById('nextBtn').innerText = 'عرض النتيجة';
             }
             
-            // تعطيل زر التالي للخطوة الجديدة حتى يتم الاختيار
             document.getElementById('nextBtn').disabled = true;
             document.getElementById('nextBtn').style.opacity = '0.5';
-
         } else {
-            // عرض النتيجة النهائية
             showResults();
         }
         updateProgress();
@@ -553,13 +462,10 @@
 
     function prevStep() {
         if (currentStep > 1) {
-            // إخفاء الخطوة الحالية
             document.getElementById('step' + currentStep).classList.remove('active');
             currentStep--;
-            // إظهار الخطوة السابقة
             document.getElementById('step' + currentStep).classList.add('active');
             
-            // تحديث الأزرار
             if (currentStep === 1) {
                 document.getElementById('backBtn').style.display = 'none';
             }
@@ -571,25 +477,25 @@
     }
 
     function showResults() {
-        // إخفاء الكويز وإظهار النتيجة
         document.getElementById('step' + currentStep).classList.remove('active');
         document.getElementById('quizActions').style.display = 'none';
         document.getElementById('progressBar').parentElement.style.display = 'none';
         document.getElementById('resultBox').style.display = 'block';
 
-        // حساب النتيجة التقديرية بناءً على المدخلات
         if(userChoices.step1 === 'weight_loss') {
-            document.getElementById('recommendedPlan').innerText = 'FLOD Clean & Lean Plan';
+            document.getElementById('recommendedPlan').innerText = 'باقة FLOD Low Calorie Clean';
             document.getElementById('calResult').innerText = '1,600';
             document.getElementById('proteinResult').innerText = '140g';
             document.getElementById('carbResult').innerText = '130g';
         } else if(userChoices.step1 === 'muscle_build') {
-            document.getElementById('recommendedPlan').innerText = 'FLOD Muscle & Power Plan';
+            document.getElementById('recommendedPlan').innerText = 'باقة FLOD Muscle & Power';
             document.getElementById('calResult').innerText = '2,600';
             document.getElementById('proteinResult').innerText = '190g';
             document.getElementById('carbResult').innerText = '250g';
         }
     }
+
+    updateProgress();
 </script>
 </body>
 </html>
